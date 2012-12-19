@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/masterLayout.xhtml">
+	
+	<ui:define name="windowTitle">#{msg.templateCost}</ui:define>
+	
+	<ui:define name="contentTitle">
+		<h:outputText id="titleText" value="#{msg.templateCost}" />
+	</ui:define>
+
+	<ui:define name="content">
+	
+		<div style="width: 30%;" class="col">
+			<ui:include src="/sections/templateCost/templateCostList.xhtml" />
+		</div>
+		<!-- 
+		<div style="width: 40%;" class="col">
+			<ui:include src="/sections/group/groupChildList.xhtml" />
+		</div>
+		 -->
+		
+	</ui:define>
+
+</ui:composition>

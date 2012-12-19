@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable 
+	    id="schemaDataTable"
+		value="#{schemaController.schemaList}"
+		var="schema"
+		selectionMode="single"
+		selection="#{schemaController.selectedSchema}"
+		rowKey="#{schema.id}"
+		style="width: 100%; margin: auto;">
+		
+		<p:ajax event="rowSelect" update="schemaAttributeDataTable, schemaChildDataTable, schemaListSelectOneMenu, removeSchemaCommandButton" />
+		
+		<p:column headerText="${msg.schemas}" style="height: 25px" filterBy="#{schema.name}">#{schema.name}</p:column>
+		
+	</p:dataTable>
+	
+</ui:composition>

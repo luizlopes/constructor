@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<div id="form-content" style="text-align: left;">
+		<p:commandButton value="${msg.saveUpdates}" 
+			id="updateAttributeValueCommandButton"
+			actionListener="#{templateController.updateAttributeValueList}"/>
+	</div>
+
+	<p:dataTable 
+		id="templateAttributeValueListDataTable"
+		value="#{templateController.selectedTemplate.attributeValueList}"
+		var="attributeValue"
+		style="width: 100%; margin: auto">
+
+		<p:column headerText="${msg.attribute}" style="width: 35%">
+		
+			<h:outputText value="#{attributeValue.name}" rendered="#{attributeValue.formula == null}"
+				onclick="scriptDialog.show()" />
+			
+			<p:commandButton 				
+				value="#{attributeValue.name}" 
+				rendered="#{attributeValue.attribute.category eq 'CALCULATED' and attributeValue.formula != null}"
+				onclick="scriptDialog_#{attributeValue.id}.show()"
+				type="button" />
+				
+			<p:dialog 
+				header="Calculo para #{attributeValue.name}" 
+				widgetVar="scriptDialog_#{attributeValue.id}" 
+				id="scriptDialog_#{attributeValue.id}"
+				rendered="#{attributeValue.attribute.category eq 'CALCULATED' and attributeValue.formula != null}"
+				width="600"
+				height="250" >
+				<h:outputText value="Formula JavaScript" />
+				<p:inputTextarea value="#{attributeValue.formula.script}" 
+					style="width: 96%; height: 90%;" 
+					autoResize="false" />
+			</p:dialog>
+			
+		</p:column>
+		
+		<p:column headerText="${msg.value}" style="width: 45%" >  
+			<p:inputText value="#{attributeValue.value}" />  
+        </p:column>
+        
+        <p:column headerText="${msg.category}" style="width: 20%">
+			<h:outputText value="#{attributeValue.attribute.category}" />
+		</p:column>
+  
+	</p:dataTable>
+	
+</ui:composition>

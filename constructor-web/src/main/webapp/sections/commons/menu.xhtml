@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<p:menubar style="width:99%; margin:auto">
+		<p:submenu label="Configuração de Produtos">
+			<p:menuitem value="${msg.schemas}"
+				actionListener="#{buttonBean.save}" update="messages"
+				icon="ui-icon ui-icon-bullet" />
+			<p:menuitem value="${msg.templates}"
+				actionListener="#{buttonBean.update}" update="messages"
+				icon="ui-icon ui-icon-bullet" />
+			<p:menuitem value="${msg.groups}"
+				actionListener="#{buttonBean.update}" update="messages"
+				icon="ui-icon ui-icon-bullet" />
+		</p:submenu>
+	</p:menubar>
+	
+</ui:composition>

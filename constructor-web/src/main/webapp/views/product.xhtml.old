@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/masterLayout.xhtml">
+
+	<ui:define name="leftSide">
+		<div id="content-title" style="text-align: center">
+			:: ${msgs.products} ::
+		</div>
+		
+		<ui:include src="/sections/product/productList.xhtml" />
+	</ui:define>
+
+	<ui:define name="contentTitle">
+		<h:outputText id="titleText" value="#{productController.selectedProduct.name}" />
+	</ui:define>
+
+	<ui:define name="content">
+	
+		<div style="overflow: auto; float: left; width: 50%">
+			<ui:include src="/sections/product/attributeList.xhtml" />
+		</div>
+	<!-- 
+		<div style="overflow: auto; float: left; width: 50%">
+			<ui:include src="/sections/product/productChildList.xhtml" />
+		</div>
+	 -->
+		
+	</ui:define>
+
+</ui:composition>

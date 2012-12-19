@@ -1,0 +1,24 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    template="/templates/contentLayoutWith3Parts.xhtml">
+    
+    <ui:define name="centre">
+
+    <h:form prependId="false">
+     <p:panel header="Login" style="width:98%;margin:auto" >
+      <h:panelGrid columns="2">
+	   
+        #{msgs.userPrompt} <h:inputText value="#{place.city}"  size="20"/>
+        #{msgs.passPrompt} <h:inputText value="#{place.state}" size="20"/>
+  	     
+        <h:commandButton value="#{msgs.goButtonText}" 
+          style="font-family:Palatino;font-style:italic"
+          action="#{place.fetch}"/>
+	       	            
+      </h:panelGrid>
+      </p:panel>	        
+    </h:form>
+	</ui:define>
+</ui:composition>

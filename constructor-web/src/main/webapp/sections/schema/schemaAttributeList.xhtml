@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<div id="form-content" style="text-align: left; vertical-align: middle; ">
+	
+		<h:outputLabel value="${msg.attribute}: " />
+		<p:inputText id="attributeNameInputText" value="#{schemaController.attribute.name}" />
+	
+		<h:outputLabel value="${msg.category}: " /> 
+		
+		<p:selectOneMenu id="attributeCategorySelectOneMenu" value="#{schemaController.attribute.category}"
+				style="vertical-align: middle; " >
+			<f:selectItems value="#{schemaController.categorySelectItems}" />
+		</p:selectOneMenu>
+	
+		<p:commandButton
+			value="${msg.add} ${msg.attribute}"
+			actionListener="#{schemaController.addAttribute}" update="schemaAttributeDataTable, attributeNameInputText, attributeCategorySelectOneMenu" />
+
+	</div>
+	
+	<p:dataTable id="schemaAttributeDataTable" 
+		var="attribute"
+		value="#{schemaController.selectedSchema.attributeList}"
+		style="width: 100%; margin: auto">
+		
+		<p:column headerText="Atributo" style="width: 60%">#{attribute.name}</p:column>
+		
+		<p:column headerText="Categoria" style="width: 60%" >#{attribute.category}</p:column>
+		
+	</p:dataTable>
+
+</ui:composition>

@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<div id="form-content">
+		<h:outputLabel value="${msg.schema}: " />
+		
+		<p:selectOneMenu 
+			id="schemaListSelectOneMenu" 
+			value="#{schemaController.childSchemaId}"
+			style="vertical-align: middle; ">
+				
+			<f:selectItems
+				value="#{schemaController.schemaSelectItems}" />
+				
+		</p:selectOneMenu>
+		
+		<p:commandButton 
+			value="${msg.add} ${msg.childSchemas}"
+			actionListener="#{schemaController.addChildSchema()}" 
+			update="schemaChildDataTable, schemaListSelectOneMenu" />
+	</div>
+
+	<p:dataTable
+		id="schemaChildDataTable" 
+		var="schema"
+		value="#{schemaController.selectedSchema.schemaList}" 
+		style="width: 100%; margin: auto">
+		
+		<p:column headerText="${msg.childSchemas}">#{schema.name}</p:column>
+		
+	</p:dataTable>
+
+</ui:composition>

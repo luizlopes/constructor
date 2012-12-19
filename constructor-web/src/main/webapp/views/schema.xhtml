@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/masterLayout.xhtml">
+	
+	<ui:define name="windowTitle">#{msg.schemas}</ui:define>
+
+	<ui:define name="contentTitle">
+		<h:outputText id="titleText" value="#{msg.schemas}" />
+	</ui:define>
+
+	<ui:define name="content">
+	
+		<div class="navigation-top" >
+			<ui:include src="/sections/schema/schemaListMenu.xhtml" />
+		</div>
+	
+		<div style="width: 20%;" class="navigation-left">
+			<ui:include src="/sections/schema/schemaList.xhtml" />
+		</div>
+		
+		<div style="width: 41%;" class="navigation-detail">
+			<ui:include src="/sections/schema/schemaAttributeList.xhtml" />
+		</div>
+		
+		<div style="width: 36%;" class="navigation-detail">
+			<ui:include src="/sections/schema/schemaChildList.xhtml" />
+		</div>
+		
+	</ui:define>
+
+</ui:composition>

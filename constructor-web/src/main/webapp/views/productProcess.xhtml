@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/masterLayoutContent.xhtml">
+
+	<ui:define name="leftSide">
+	</ui:define>
+
+	<ui:define name="contentTitle">
+		<h:outputText id="titleText" value="${msgs.product}" />
+	</ui:define>
+
+	<ui:define name="content">
+
+		<p:wizard widgetVar="wiz"
+			flowListener="#{productController.onFlowProcess}">
+
+			<p:tab title="${msgs.select} ${msgs.template}" id="selectModel">
+				<h:panelGrid columns="2">
+
+					<h:outputText value="${msgs.template}" />
+
+					<h:selectOneMenu value="#{productController.newProduct.templateId}">
+						<f:selectItems value="#{productController.defaultTemplates}"
+							var="template" itemValue="#{template.id}"
+							itemLabel="#{template.name}" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+			</p:tab>
+
+			<p:tab title="${msgs.setValues}" id="setValues">
+				<h:dataTable value="#{productController.variableAttributeValueList}"
+					var="attrValue">
+
+					<h:column>
+						<h:outputText value="#{attrValue.name}" />
+					</h:column>
+
+					<h:column>
+						<h:inputText value="#{attrValue.value}" />
+					</h:column>
+				</h:dataTable>
+			</p:tab>
+
+			<p:tab title="${msgs.process}" id="process">
+				<h:dataTable value="#{productController.product.attributeValueList}"
+					var="attrValue">
+
+					<h:column>
+						<h:outputText value="#{attrValue.name}" style="font-weight: bold" />
+					</h:column>
+
+					<h:column>
+						<h:outputText value="#{attrValue.value}" />
+					</h:column>
+
+				</h:dataTable>
+				
+				<p:commandButton value="Salvar" actionListener="#{productController.save}"/>
+				
+			</p:tab>
+
+		</p:wizard>
+
+	</ui:define>
+
+</ui:composition>

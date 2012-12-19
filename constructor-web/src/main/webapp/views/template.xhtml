@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/templates/masterLayout.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<ui:define name="windowTitle">#{msg.templates}</ui:define>
+
+	<ui:define name="contentTitle">
+		<h:outputText id="titleText" value="#{msg.templates}" />
+	</ui:define>
+
+	<ui:define name="content">
+	
+		<div class="navigation-top" >
+			<ui:include src="/sections/template/templateListMenu.xhtml" />
+		</div>
+	
+		<div style="width: 25%;" class="navigation-left">
+			<ui:include src="/sections/template/templateList.xhtml" />
+		</div>
+		
+		<div style="width: 36%;" class="navigation-detail">
+			<ui:include src="/sections/template/templateAttributeValueList.xhtml" />
+		</div>
+		
+		<div style="width: 36%;" class="navigation-detail">
+			<ui:include src="/sections/template/templateChildList.xhtml" />
+		</div>
+		
+	</ui:define>
+
+</ui:composition>

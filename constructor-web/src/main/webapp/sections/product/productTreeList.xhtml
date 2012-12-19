@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<div class="ui-state-default" 
+		style="text-align: center; white-space: nowrap; padding: 4px 10px; margin: 0px; overflow: hidden;">
+		<h:outputText value="#{productController.selectedProduct.name}" id="productTreeTableTitle" />
+	</div>
+	
+	<p:tree
+		id="productTreeTable" 
+		value="#{productController.selectedProductNode}" 
+		var="product"
+		selection="#{productController.selectedNode}" 
+		selectionMode="single"
+		style="width: 100%; padding: 0px; border: 0px"
+		rowStyleClass="buttonLine">
+		
+		<p:ajax event="select" update="productAttributeList, productAttributeListTitle" />
+		
+		<p:treeNode>
+			<h:outputText value="#{product.name} (#{product.template.schema.name}) x#{product.amount}" />
+		</p:treeNode>
+		
+	</p:tree>	
+
+</ui:composition>

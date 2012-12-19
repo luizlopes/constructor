@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<div id="form-content">
+	
+		<p:commandButton
+			value="${msg.saveUpdates}" 
+			actionListener="#{templateController.updateTemplateChildList}" />
+	</div>
+	
+	<p:dataTable
+		id="templateChildListDataTable"
+		value="#{templateController.templateChildList}"
+		var="templateChild"
+		style="width: 100%">
+		
+ 		<p:column headerText="${msg.template}" style="width: 40%">
+ 			<p:selectOneMenu value="#{templateChild.templateId}" id="templateChildSelectOneMenu" >
+				<f:selectItems value="#{templateChild.templateSelectItems}" />
+			</p:selectOneMenu>
+ 		</p:column>
+
+		<p:column headerText="${msg.schema}" style="width: 40%">#{templateChild.schema.name}</p:column>
+		
+		<p:column headerText="${msg.amount}" style="width: 20%">
+			<p:inputText value="#{templateChild.amount}" size="2" maxlength="2" />
+		</p:column>
+	
+	</p:dataTable>
+	
+	
+</ui:composition>

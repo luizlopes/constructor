@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<div id="form-content">
+	
+		<h:outputLabel value="${msg.template}: " />
+		<p:selectOneMenu value="#{groupController.template.templateChildId}" 
+			id="groupChildSelectOneMenu" 
+			style="vertical-align: middle;">
+			<f:selectItems value="#{groupController.templateSelectItems}" /> 
+		</p:selectOneMenu>
+
+		<p:commandButton
+			id="addTemplateChildCommandButton"
+			value="${msg.add} ${msg.template}"
+			actionListener="#{groupController.addTemplateAmount}" 
+			update="groupChildListDataTable, groupChildSelectOneMenu" />
+			
+		<p:commandButton 				
+			value="${msg.edit}" 
+			onclick="scriptDialog.show()"
+			type="button" />	
+			
+	</div>
+	
+	<p:dataTable
+		id="groupChildListDataTable"
+		value="#{groupController.selectedTemplate.templateAmountList}"
+		var="groupChild"
+		style="width: 100%">
+		
+ 		<p:column headerText="${msg.template}" style="width: 40%">
+ 			<p:column headerText="${msg.schema}" style="width: 40%">#{groupChild.template.name}</p:column>
+ 		</p:column>
+
+		<p:column headerText="${msg.schema}" style="width: 40%">#{groupChild.template.schema.name}</p:column>
+		
+		<p:column headerText="${msg.amount}" style="width: 20%">#{groupChild.amount}</p:column>
+	
+	</p:dataTable>
+	
+	<p:dialog 
+		id="scriptDialog"
+		header="Cálculo para #{groupController.selectedTemplate.name}" 
+		widgetVar="scriptDialog" 
+		width="600"
+		height="300" >
+		
+		<h:outputText value="Formula JavaScript" />
+		<p:inputTextarea value="#{groupController.templateScript}" 
+			style="width: 96%; height: 82%;" 
+			autoResize="false" />
+			
+		<p:commandButton 				
+			value="${msg.save}"
+			actionListener="#{groupController.updateTemplateScript}" />
+		 
+	</p:dialog>
+	
+</ui:composition>

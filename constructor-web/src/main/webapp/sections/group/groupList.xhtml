@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<p:dataTable
+		id="groupDataTable"
+		value="#{groupController.templateList}"
+		var="template" 
+		selectionMode="single"
+		selection="#{groupController.selectedTemplate}"
+		rowKey="#{template.id}"
+		style="width: 100%; margin: auto;"
+		rowStyleClass="buttonLine">
+		
+		<p:ajax event="rowSelect" update="groupChildListDataTable, groupChildSelectOneMenu, scriptDialog" />
+		
+		<p:column headerText="${msg.template}" style="width: 50%;">#{template.name}</p:column>
+		
+		<p:column headerText="${msg.schema}" style="width: 50%;"
+			filterBy="#{template.schema.id}"   
+               filterOptions="#{templateController.schemaSelectItems}">
+			<h:outputText value="#{template.schema.name}" />
+		</p:column>
+			
+	</p:dataTable>
+
+</ui:composition>

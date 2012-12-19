@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<p:wizard widgetVar="wiz"
+		flowListener="#{productController.onFlowProcess}">
+		
+		<p:tab title="${msg.select} ${msg.template}" id="selectModel">
+			<h:panelGrid columns="2">
+				<h:outputText value="${msg.template}" />
+				<p:selectOneMenu value="#{productController.templateId}">
+					<f:selectItems value="#{productController.templateSelectItems}" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+		</p:tab>
+		
+		<p:tab title="${msg.setValues}" id="setValues">
+			<p:dataTable 
+				value="#{productController.attributeValueSet}"
+				var="attrValue">
+				<p:column headerText="#{msg.attribute}" style="width: 60%">
+					<h:outputText value="#{attrValue.attribute.name}" />
+				</p:column>
+				<p:column headerText="#{msg.value}" style="width: 40%">
+					<h:inputText value="#{attrValue.value}" />
+				</p:column>
+			</p:dataTable>
+			
+			<h:panelGrid columns="2">
+				<h:outputText value="${msg.amount}: " />
+				<h:inputText value="#{productController.amount}" />
+			</h:panelGrid>
+		</p:tab>
+
+		<p:tab title="${msg.process}" id="process">
+			<p:dataTable value="#{productController.product.attributeValueList}"
+				var="attrValue">
+				<p:column headerText="#{msg.attribute}" style="width: 60%">
+					<h:outputText value="#{attrValue.name}" style="font-weight: bold" />
+				</p:column>
+				<p:column headerText="#{msg.value}" style="width: 40%">
+					<h:outputText value="#{attrValue.value}" />
+				</p:column>
+			</p:dataTable>
+			
+			<p:commandButton value="#{msg.productAdd}" 
+					actionListener="#{productController.addProduct}"
+					update="productTreeTable, productAttributeList"
+					onclick="generatorDialog.hide()" />
+		</p:tab>
+
+	</p:wizard>
+
+ </ui:composition>

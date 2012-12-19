@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<div id="form-content" style="vertical-align: middle;">
+		<h:outputLabel value="${msg.template}: " />
+		<p:inputText value="#{templateController.template.name}" id="templateInputText" />
+		
+		<h:outputLabel value="${msg.schema}: " />
+		<p:selectOneMenu value="#{templateController.template.schemaId}" id="schemaSelectOneMenu" >
+			<f:selectItems value="#{templateController.schemaSelectItems}" />
+		</p:selectOneMenu>
+		
+		<h:selectOneMenu value="#{templateController.template.templateType}" id="templateTypeSelectOneMenu" style="display: none;">
+			<f:selectItem itemLabel="DEFAULT" itemValue="#{templateController.templateType}" />
+		</h:selectOneMenu>
+		
+		<p:commandButton value="#{msg.templateAdd}"
+			actionListener="#{templateController.addTemplate}" 
+			update="templateDataTable, templateInputText, schemaSelectOneMenu, templateAttributeValueListDataTable, templateChildListDataTable, templateChildSelectOneMenu, scriptDialog"  
+			id="addTemplateButton" />
+			
+		<p:commandButton value="${msg.templateRemove}" 
+				actionListener="#{templateController.removeTemplate}"
+				id="removeTemplateCommandButton"
+				update="templateDataTable, templateAttributeValueListDataTable, templateChildListDataTable, removeTemplateCommandButton">
+			<f:attribute name="templateId" value="#{templateController.selectedTemplate.id}" />
+		</p:commandButton>
+	</div>
+
+</ui:composition>

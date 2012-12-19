@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<p:dataTable 
+		id="productDataTable"
+		value="#{productController.productList}"
+		var="product"
+		selection="#{productController.selectedProduct}" 
+		selectionMode="single"
+		style="width: 100%;"
+		rowStyleClass="buttonLine">
+		
+		<p:ajax event="rowSelect" update="productTreeTable, productTreeTableTitle" />
+		
+		<p:column headerText="id" style="width: 10%;">
+			<h:outputText value="#{product.id}" />
+		</p:column>
+		
+		<p:column headerText="${msg.product}" style="width: 60%;">
+			<h:outputText value="#{product.name}" />
+		</p:column>
+		
+		<p:column headerText="${msg.schema}" style="width: 40%;">
+			<h:outputText value="#{product.template.schema.name}" />
+		</p:column>
+		
+	</p:dataTable>
+	
+
+</ui:composition>

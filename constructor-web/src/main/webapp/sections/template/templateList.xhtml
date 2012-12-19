@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<p:dataTable
+		id="templateDataTable"
+		value="#{templateController.templateList}"
+		var="template" 
+		selectionMode="single"
+		selection="#{templateController.selectedTemplate}"
+		rowKey="#{template.id}"
+		style="width: 100%; margin: auto; border: none;"
+		rowStyleClass="buttonLine">
+		
+		<p:ajax event="rowSelect" update="templateAttributeValueListDataTable, templateChildListDataTable, templateChildSelectOneMenu" />
+		
+		<p:column headerText="${msg.template}" style="width: 50%">
+			<h:outputText value="#{template.name}" />
+		</p:column>
+		
+		<p:column headerText="${msg.schema}" style="width: 50%"
+			filterBy="#{template.schema.id}"   
+               filterOptions="#{templateController.schemaSelectItems}">
+			<h:outputText value="#{template.schema.name}" />
+		</p:column>
+		
+	</p:dataTable>
+
+</ui:composition>

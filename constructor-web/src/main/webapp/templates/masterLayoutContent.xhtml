@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+
+	<h:head>
+		<title><ui:insert name="windowTitle">#{msgs.placesWindowTitle}</ui:insert></title>
+	</h:head>
+
+	<h:body>
+		<h:outputStylesheet library="css" name="styles.css" target="body" />
+		
+		<h:form prependId="false">
+		
+			<p:growl showDetail="true" />
+
+			<div class="pageHeading">
+				<!-- <ui:insert name="heading"><ui:include src="/sections/commons/menu.xhtml" /></ui:insert>  -->
+			</div>
+
+			<div id="content">
+				
+				<div id="content-title">
+					<ui:insert name="contentTitle" />
+				</div>
+				
+				<ui:insert name="content" />
+			</div>
+
+		</h:form>
+		
+	</h:body>
+	
+</f:view>
+
+</html>
